@@ -30,13 +30,13 @@ class botHandler:
             soup = BeautifulSoup(r.text, "html.parser")
             result = soup.find_all("a")[0].get("onclick")
             groups = re.search(r"href='(.*)'", result)
-            doc_url = groups.group(1)
+            doc_url = groups.group(1).lstrip("//")
             
         except:
             self.sendMessage("Something Went wrong, Please double check your PMID", chat_id)
 
         else:
-            print("Document url is: ", doc_url)
+            
             request_url = "https://api.telegram.org/bot{token}/senddocument?chat_id={id}&document={docurl}".format(token = self.token, id = chat_id, docurl = doc_url)
             requests.get(request_url)
         
