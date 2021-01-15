@@ -31,7 +31,7 @@ class botHandler:
             result = soup.find_all("a")[0].get("onclick")
             groups = re.search(r"href='(.*)'", result)
             url = groups.group(1)
-            print(url)
+            
         except:
             self.sendMessage("Something Went wrong, Please double check your PMID", chat_id)
 
@@ -52,7 +52,7 @@ while True:
         chat_id = updates[n]["message"]["chat"]["id"]
         message = updates[n]["message"]["text"]
         update_id = latest_id+1
-        print(message, update_id, chat_id)
+        print("message: ", message, "from", chat_id, update_id)
 
         if message =="/start" or message == "/help":
             bot.sendMessage("Please Send the PMID of the article", chat_id)
