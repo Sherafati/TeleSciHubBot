@@ -36,6 +36,7 @@ class botHandler:
             self.sendMessage("Something Went wrong, Please double check your PMID", chat_id)
 
         else:
+            print("Document url is: ", doc_url)
             request_url = "https://api.telegram.org/bot{token}/senddocument?chat_id={id}&document={docurl}".format(token = self.token, id = chat_id, docurl = doc_url)
             requests.get(request_url)
         
@@ -63,4 +64,3 @@ while True:
 
     else:
         continue
-
