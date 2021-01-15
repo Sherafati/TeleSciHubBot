@@ -1,0 +1,66 @@
+import requests
+from bs4 import BeautifulSoup
+import time
+import re
+
+
+
+
+class botHandler:
+    def __init__(self,token):
+        self.token = token
+
+    def get_update(self, offset=None):
+        
+        url = "https://api.telegram.org/bot{}/Getupdates?offset={}&timeout=100".format(self.token, offset)
+        r = requests.get(url)
+        result = r.json()["result"]
+        
+        return result
+
+    def sendMessage(self, message, chat_id):
+        url = "https://api.telegram.org/bot1596209098:AAHirDlYEQsz-nKLik-Bdkv7IcK5jBqi0uI/SendMessage?chat_id={0}&text={1}".format(chat_id, message)
+        r = requests.get(url)
+
+    def upload(self, PMID, chat_id):
+        url = "https://sci-hub.do"
+        payload = {"request": PMID}
+        r = requests.post(url, data = payload)
+        try:
+            soup = BeautifulSoup(r.text, "html.parser")
+            result = soup.find_all("a")[0].get("onclick")
+            groups = re.search(r"href='(.*)'", result)
+            url = groups.group(1)
+            print(url)
+        except:
+            self.sendMessage("Something Went wrong, Please double check your PMID", chat_id)
+
+        else:
+            request_url = "https://api.telegram.org/bot{token}/senddocument?chat_id={id}&document={docurl}".format(token = self.token, id = chat_id, docurl = url)
+        
+        
+
+
+bot = botHandler("1596209098:AAHirDlYEQsz-nKLik-Bdkv7IcK5jBqi0uI")
+update_id = 0
+while True:
+
+    updates = bot.get_update(update_id)
+    if updates:
+        n = len(updates) -1
+        latest_id = updates[n]["update_id"]
+        chat_id = updates[n]["message"]["chat"]["id"]
+        message = updates[n]["message"]["text"]
+        update_id = latest_id+1
+        print(message, update_id, chat_id)
+
+        if message =="/start" or message == "/help":
+            bot.sendMessage("Please Send the PMID of the article", chat_id)
+
+        else:
+            bot.upload(message, chat_id)
+        
+
+    else:
+        continue
+
