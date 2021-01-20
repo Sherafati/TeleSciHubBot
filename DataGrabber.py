@@ -4,8 +4,8 @@ import time
 import re
 
 url = "https://sci-hub.do"
-payload = {"request": "26731743"}
-r = requests.post(url, data = payload)
+#payload = {"request": "26731743"}
+r = requests.get(url)
 print(r.text)
 
 # class botHandler:
