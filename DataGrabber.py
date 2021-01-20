@@ -2,7 +2,8 @@ import requests
 from bs4 import BeautifulSoup
 import re
 
-r = requests.get("https://sci-hub.do")
+payload = {"request":"28866452"}
+r = requests.post("https://sci-hub.do", data = payload)
 print(r.text)
 
 # class botHandler:
