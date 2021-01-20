@@ -29,7 +29,7 @@ class botHandler:
         try:
             soup = BeautifulSoup(r.text, "html.parser")
             result = soup.find_all("a")[0].get("onclick")
-            groups = re.search(r"href='(.*)'", result)
+            groups = re.search(r"//(.*)", result)
             doc_url = groups.group(1).lstrip("//")
             
         except:
