@@ -19,7 +19,7 @@ class botHandler:
         return result
 
     def sendMessage(self, message, chat_id):
-        url = "https://api.telegram.org/bot1596209098:AAHirDlYEQsz-nKLik-Bdkv7IcK5jBqi0uI/SendMessage?chat_id={0}&text={1}".format(chat_id, message)
+        url = "https://api.telegram.org/bot{}/SendMessage?chat_id={}&text={}".format(self.token, chat_id, message)
         r = requests.get(url)
 
     def upload(self, PMID, chat_id):
@@ -36,7 +36,7 @@ class botHandler:
             self.sendMessage("Something Went wrong, Please double check your PMID", chat_id)
 
         else:
-            
+            print(doc_url)
             request_url = "https://api.telegram.org/bot{token}/senddocument?chat_id={id}&document={docurl}".format(token = self.token, id = chat_id, docurl = doc_url)
             requests.get(request_url)
         
