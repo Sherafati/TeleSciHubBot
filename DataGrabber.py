@@ -1,9 +1,16 @@
 import requests
 from bs4 import BeautifulSoup
 import re
+from random_user_agent.user_agent import UserAgent
+from random_user_agent.params import SoftwareName, OperatingSystem
 
+operating_systems = [OperatingSystem.WINDOWS.value, OperatingSystem.LINUX.value, OperatingSystem.MAC_OS_X.value]
+software_names = [SoftwareName.CHROME.value,SoftwareName.FIREFOX.value]
 
-headers = {"user-agent":"Mozilla/5.0"}
+user_agent_rotator = UserAgent(software_names=software_names, operating_systems=operating_systems, limit=400)
+user_agent = user_agent_rotator.get_random_user_agent()
+print(user_agent)
+headers = {"user-agent":user_agent}
 url = "https://sci-hub.do"
 payload = {"request": "28866452"}
 s = requests.Session()
