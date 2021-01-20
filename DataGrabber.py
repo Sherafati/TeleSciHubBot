@@ -30,7 +30,7 @@ class botHandler:
             soup = BeautifulSoup(r.text, "html.parser")
             result = soup.find_all("a")[0].get("onclick")
             groups = re.search(r"//(.*)", result)
-            doc_url = groups.group(1).lstrip("//")
+            doc_url = groups.group(1)
             
         except:
             self.sendMessage("Something Went wrong, Please double check your PMID", chat_id)
