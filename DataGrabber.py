@@ -4,7 +4,7 @@ import time
 import re
 
 r = requests.get("https://sci-hub.do")
-pint(r.status_code)
+print(r.status_code)
 
 
 # class botHandler:
