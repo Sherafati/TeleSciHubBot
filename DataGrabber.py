@@ -2,10 +2,10 @@ import requests
 from bs4 import BeautifulSoup
 import time
 import re
-
-r = requests.get("https://sci-hub.do")
-print(r.status_code)
-
+url = "https://sci-hub.do"
+payload = {"request": 26731743}
+r = requests.post(url, data = payload)
+print(r.text)
 
 # class botHandler:
 #     def __init__(self,token):
