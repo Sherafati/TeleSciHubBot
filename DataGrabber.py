@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import re
 
 payload = {"reuqest":28866452}
-r = requets.post("https://sci-hub.do", data = payload)
+r = requests.post("https://sci-hub.do", data = payload)
 print(r.text)
 
 # class botHandler:
