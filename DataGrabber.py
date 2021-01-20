@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import time
 import re
 
-url = "https://google.com"
+url = "https://sci-hub.se"
 #payload = {"request": "26731743"}
 r = requests.get(url)
 print(r.text)
