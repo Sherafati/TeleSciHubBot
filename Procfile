@@ -1,1 +1,1 @@
-web: python DataGrabber.py
+worker: python DataGrabber.py
