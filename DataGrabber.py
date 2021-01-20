@@ -3,11 +3,11 @@ from bs4 import BeautifulSoup
 import re
 
 
-#headers = {"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:84.0) Gecko/20100101 Firefox/84.0"}
+headers = {"user-agent":"Mozilla/5.0"}
 url = "https://sci-hub.do"
 payload = {"request": "27045437"}
 with requests.Session() as s:
-        r = s.post(url, data = payload)
+        r = s.post(url, data = payload, headers = headers)
         print(r.status_code)
 
 
