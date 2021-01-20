@@ -13,9 +13,10 @@ print(user_agent)
 headers = {"user-agent":user_agent}
 url = "https://sci-hub.do"
 payload = {"request": "28866452"}
-#s = requests.Session()
-r = requests.post(url, data = payload, headers = headers)
-print(r.status_code)
+with requests.session() as s:
+        
+        r = s.post(url, data = payload, headers = headers)
+        print(r.status_code)
 
 
 # class botHandler:
