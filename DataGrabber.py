@@ -21,12 +21,13 @@ class botHandler:
     def sendMessage(self, message, chat_id):
         url = "https://api.telegram.org/bot{}/SendMessage?chat_id={}&text={}".format(self.token, chat_id, message)
         r = requests.get(url)
+        print(r.status_code)
 
     def upload(self, PMID, chat_id):
         url = "https://sci-hub.do"
         payload = {"request": PMID}
         r = requests.post(url, data = payload)
-        print(r.text)
+
         try:
             soup = BeautifulSoup(r.text, "html.parser")
             result = soup.find_all("a")[0].get("onclick")
