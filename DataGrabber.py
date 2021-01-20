@@ -26,12 +26,13 @@ class botHandler:
         url = "https://sci-hub.do"
         payload = {"request": PMID}
         r = requests.post(url, data = payload)
+        print(r.text)
         try:
             soup = BeautifulSoup(r.text, "html.parser")
             result = soup.find_all("a")[0].get("onclick")
             groups = re.search(r"//(.*)", result)
             doc_url = groups.group(1)
-            print(doc_url)
+            
         except:
             self.sendMessage("Something Went wrong, Please double check your PMID", chat_id)
 
