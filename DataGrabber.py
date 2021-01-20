@@ -2,9 +2,9 @@ import requests
 from bs4 import BeautifulSoup
 import re
 
-payload = {"reuqest":28866452}
+payload = {"reuqest":"28866452"}
 headers = {"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:84.0) Gecko/20100101 Firefox/84.0", "Referer":"https://sci-hub.do/"}
-r = requests.get("https://sci-hub.do")
+r = requests.get("https://sci-hub.do", headers = headers)
 print(r.text)
 
 # class botHandler:
