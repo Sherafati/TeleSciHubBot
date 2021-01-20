@@ -12,7 +12,7 @@ user_agent = user_agent_rotator.get_random_user_agent()
 print(user_agent)
 headers = {"user-agent":user_agent}
 url = "https://sci-hub.do"
-payload = {"request": "28866452"}
+payload = {"request": "18425907"}
 with requests.session() as s:
         
         r = s.post(url, data = payload, headers = headers)
