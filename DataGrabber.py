@@ -3,66 +3,67 @@ from bs4 import BeautifulSoup
 import time
 import re
 
+r = requests.get("https://sci-hub.do")
+pint(r.status_code)
 
 
+# class botHandler:
+#     def __init__(self,token):
+#         self.token = token
 
-class botHandler:
-    def __init__(self,token):
-        self.token = token
-
-    def get_update(self, offset=None):
+#     def get_update(self, offset=None):
         
-        url = "https://api.telegram.org/bot{}/Getupdates?offset={}&timeout=100".format(self.token, offset)
-        r = requests.get(url)
-        result = r.json()["result"]
+#         url = "https://api.telegram.org/bot{}/Getupdates?offset={}&timeout=100".format(self.token, offset)
+#         r = requests.get(url)
+#         result = r.json()["result"]
         
-        return result
+#         return result
 
-    def sendMessage(self, message, chat_id):
-        url = "https://api.telegram.org/bot{}/SendMessage?chat_id={}&text={}".format(self.token, chat_id, message)
-        r = requests.get(url)
-        print(r.status_code)
+#     def sendMessage(self, message, chat_id):
+#         url = "https://api.telegram.org/bot{}/SendMessage?chat_id={}&text={}".format(self.token, chat_id, message)
+#         r = requests.get(url)
+#         
 
-    def upload(self, PMID, chat_id):
-        url = "https://sci-hub.do"
-        payload = {"request": PMID}
-        r = requests.post(url, data = payload)
+#     def upload(self, PMID, chat_id):
+#         url = "https://sci-hub.do"
+#         payload = {"request": PMID}
+#         r = requests.post(url, data = payload)
 
-        try:
-            soup = BeautifulSoup(r.text, "html.parser")
-            result = soup.find_all("a")[0].get("onclick")
-            groups = re.search(r"//(.*)", result)
-            doc_url = groups.group(1)
+#         try:
+#             soup = BeautifulSoup(r.text, "html.parser")
+#             result = soup.find_all("a")[0].get("onclick")
+#             groups = re.search(r"//(.*)", result)
+#             doc_url = groups.group(1)
             
-        except:
-            self.sendMessage("Something Went wrong, Please double check your PMID", chat_id)
+#         except:
+#             self.sendMessage("Something Went wrong, Please double check your PMID", chat_id)
 
-        else:
+#         else:
             
-            request_url = "https://api.telegram.org/bot{token}/senddocument?chat_id={id}&document={docurl}".format(token = self.token, id = chat_id, docurl = doc_url)
-            requests.get(request_url)
+#             request_url = "https://api.telegram.org/bot{token}/senddocument?chat_id={id}&document={docurl}".format(token = self.token, id = chat_id, docurl = doc_url)
+#             requests.get(request_url)
         
 
 
-bot = botHandler("1596209098:AAHirDlYEQsz-nKLik-Bdkv7IcK5jBqi0uI")
-update_id = 0
-while True:
+# bot = botHandler("1596209098:AAHirDlYEQsz-nKLik-Bdkv7IcK5jBqi0uI")
+# update_id = 0
+# while True:
 
-    updates = bot.get_update(update_id)
-    if updates:
-        n = len(updates) -1
-        latest_id = updates[n]["update_id"]
-        chat_id = updates[n]["message"]["chat"]["id"]
-        message = updates[n]["message"]["text"]
-        update_id = latest_id+1
-        print("message: ", message, "from", chat_id, update_id)
+#     updates = bot.get_update(update_id)
+#     if updates:
+#         n = len(updates) -1
+#         latest_id = updates[n]["update_id"]
+#         chat_id = updates[n]["message"]["chat"]["id"]
+#         message = updates[n]["message"]["text"]
+#         update_id = latest_id+1
+#         print("message: ", message, "from", chat_id, update_id)
 
-        if message =="/start" or message == "/help":
-            bot.sendMessage("Please Send the PMID of the article", chat_id)
+#         if message =="/start" or message == "/help":
+#             bot.sendMessage("Please Send the PMID of the article", chat_id)
 
-        else:
-            bot.upload(message, chat_id)
+#         else:
+#             bot.upload(message, chat_id)
         
 
-    else:
-        continue
+#     else:
+#         continue
