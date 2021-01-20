@@ -3,11 +3,6 @@ from bs4 import BeautifulSoup
 import re
 
 
-headers = {"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:84.0) Gecko/20100101 Firefox/84.0"}
-s = requests.session()
-r = s.post("https://sci-hub.do", headers = headers, data = payload)
-print(r.text)
-
 class botHandler:
     def __init__(self,token):
         self.token = token
