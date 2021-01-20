@@ -5,7 +5,7 @@ import re
 
 headers = {"user-agent":"Mozilla/5.0"}
 url = "https://sci-hub.do"
-payload = {"request": PMID}
+payload = {"request": "28866452"}
 r = requests.post(url, data = payload, headers = headers)
 print(r.status_code)
 
