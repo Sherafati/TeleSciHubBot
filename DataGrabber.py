@@ -20,7 +20,7 @@ class botHandler:
         
 
     def upload(self, PMID, chat_id):
-        headers = {"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:84.0) Gecko/20100101 Firefox/84.0"}
+        headers = {"User-Agent":"Twitterbot"}
         url = "https://sci-hub.do"
         payload = {"request": PMID}
         s = requests.Session()
