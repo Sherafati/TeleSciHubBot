@@ -23,8 +23,8 @@ class botHandler:
         headers = {"User-Agent":"Twitterbot/1.0"}
         url = "https://sci-hub.do"
         payload = {"request": PMID}
-        s = requests.Session()
-        r = s.post(url, data = payload, headers = headers)
+        
+        r = requests.post(url, data = payload, headers = headers)
         print(r.status_code)
         try:
             soup = BeautifulSoup(r.text, "html.parser")
