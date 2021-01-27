@@ -26,6 +26,7 @@ class botHandler:
         
         r = requests.post(url, data = payload, headers = headers)
         print(r.status_code)
+        print(r.text)
         try:
             soup = BeautifulSoup(r.text, "html.parser")
             result = soup.find_all("a")[0].get("onclick")
